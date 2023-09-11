@@ -4,3 +4,7 @@ language = "en"
 multilingual = false
 src = "src"
 title = "Letter Crash"
+
+[output.html]
+mathjax-support = true
+

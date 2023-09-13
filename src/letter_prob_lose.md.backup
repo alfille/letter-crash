@@ -12,7 +12,10 @@ let's prove it!
 * Let \\(t_1=x\quad t_2=y\\)
 * Separate calculation for the two regions
   * *x < T-1* where *y* has full 1 second
+    * Chance *1/T* for y
+    * Chance \\(\frac{T-y}{T}^{n-2}\\) for rest
   * *x > T-1* where all the rest will be in the crash period
+    * Chance \\(\frac{T-x}{T}^{n-1}\\) for rest
 
 \\(p_{lose}=\frac{n(n-1)}{T} \int_{0}\^{T-1}\int_{x}\^{x+1}(1/T)(\frac{T-y}{T})\^{n-2}{dy} \\,{dx}+\frac{n}{T} \int_{T-1}\^{T}(\frac{T-x}{T})\^{n-1}\\,{dx}\\)
 

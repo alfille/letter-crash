@@ -37,3 +37,5 @@ Becomes:
 Solving for *Quantity*
 
 \\({p_{win}}^M Quantity = \sum_{i=0}\^{M-1}{p_{win}}\^ip_{loss}i\\,q_{win}+(1-{p_{win}}^M)q_{loss}+{p_{win}}\^M(M\\,q_{win})\\)
+\\({p_{win}}^M Quantity = q_{win}\\,p_{loss}\sum_{i=0}\^{M-1}{i\\,{p_{win}}\^i}+q_{loss}\\,(1-{p_{win}}^M)+M\\,q_{win}{p_{win}}\^M\\)
+

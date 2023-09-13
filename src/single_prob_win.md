@@ -34,3 +34,6 @@ The function bug_report() provides bug reporting information.
                                       T
 ```
 ![](images/single_prob_plot.png)
+
+------------------
+So probability goes down with increasing players (*n*) and up with increasing time (*T*).

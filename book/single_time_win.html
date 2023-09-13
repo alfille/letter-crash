@@ -177,7 +177,11 @@
 <li>Time when win is known is one second later = <em>x+1</em></li>
 </ul>
 </li>
-<li>Thge time must be normalized to the probablity</li>
+<li>This is <strong>the time given a win</strong> (no crash).
+<ul>
+<li>The time must be normalized to the probablity of a win</li>
+</ul>
+</li>
 </ul>
 <p>So \(p_{win}*t_{win}=\frac{n}{T} \int_{0}^{T-1} (x+1)(\frac{T-(x+1)}{T})^{n-1}{dx}=\frac{T+n}{n+1}(\frac{T-1}{T})^n=\frac{T+n}{n+1}p_{win}\)</p>
 <p>\(t_{win}=\frac{T+n}{n+1}\)</p>
@@ -188,6 +192,9 @@
                                      n + 1
 </code></pre>
 <p><img src="images/single_time_plot.png" alt="" /></p>
+<hr />
+<p>So the time increases with longer interval time (<em>T</em>).
+The time <em>decreases</em> with increased players (<em>n</em>), since the first player's guess is more likely to be earlier.</p>
 
                     </main>
 

@@ -36,6 +36,16 @@ Becomes:
 
 Solving for *Quantity*
 
-\\({p_{win}}^M Quantity = \sum_{i=0}\^{M-1}{p_{win}}\^ip_{loss}i\\,q_{win}+(1-{p_{win}}^M)q_{loss}+{p_{win}}\^M(M\\,q_{win})\\)
 \\({p_{win}}^M Quantity = q_{win}\\,p_{loss}\sum_{i=0}\^{M-1}{i\\,{p_{win}}\^i}+q_{loss}\\,(1-{p_{win}}^M)+M\\,q_{win}{p_{win}}\^M\\)
 
+The series i*p^i also has a closed-form expression:
+
+\\(\sum_{i=0}\^{M-1}{i\\,{p_{win}}\^i} = \frac{(M-1){p_{win}}^{M+1}-M{p_{win}}^M+p_win}{(1-p_{win})^2}\\)
+
+Substituting and conbining with the last term:
+
+\\({p_{win}}^M Quantity = q_{win}\frac{p_{win}-{p_{win}}^{M+1}}{1-p_{win}}+q_{loss}\\,(1-{p_{win}}^M)\\)
+
+Alternatively:
+
+\\(Quantity = \left(\frac{1-{p_{win}}^M}{{p_{win}}^M}\right)\left(q_{loss}+\frac{p_{win}}{1-p_{win}}q_{win}\right)\\)

@@ -187,7 +187,7 @@
 <hr />
 <p><strong>No cheating</strong> -- everyone has to play by the same rules, and everyone has to choose their time randomly and independently during that interval.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="graphical-solution"><a class="header" href="#graphical-solution">Graphical Solution</a></h1>
-<p>DSK has a very inventive solution for the single letter step,, at least for the 2-person game:</p>
+<p>DSK has a very inventive solution for the single letter step, at least for the 2-person game:</p>
 <p><img src="images/graphical.png" alt="" /></p>
 <h3 id="explantation"><a class="header" href="#explantation">Explantation</a></h3>
 <p>This is for 2 players, time interval random over 3 seconds, and 1 second lockout.</p>
@@ -206,7 +206,7 @@
 <p><em>T</em> time interval</p>
 <p><em>1</em> second lockout</p>
 <p>Each player chooses a time randomly (and uniformly) in the interval 0 to <em>T</em> seconds.</p>
-<p>If no other player chooses a time less than 1 second after the first time chosen, the ste is <strong>won</strong></p>
+<p>If no other player chooses a time less than 1 second after the first time chosen, the step is <strong>won</strong></p>
 <h2 id="full-game"><a class="header" href="#full-game">Full game</a></h2>
 <p><em>M</em> letters in alphabet (e.g. 26 in english)</p>
 <p>Keep doing steps until:</p>
@@ -223,9 +223,9 @@
 <li>We have <em>n</em> players</li>
 <li>We'll have 1 second as the lockout time (time after the letter is first called out) </li>
 <li>Each letter is independent, so we can figure out the \(p_{win}\) probability as well as \(t_{win}\) and \(t_{loss}\) times.</li>
-<li>Expected time <em>E</em> can be computed knowing the formula from each letter, and the alphabet length <em>M</em></li>
+<li>Expected time //(Time//) can be computed knowing the formula from each letter, and the alphabet length //(M)//</li>
 </ul>
-<p>We can leave 1 second as an explicit number, since any other choice would just scale <em>T</em> and <em>E</em></p>
+<p>We can leave 1 second as an explicit number, since any other choice would just scale <em>T</em> and <em>Time</em></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="single-letter-win"><a class="header" href="#single-letter-win">Single letter win</a></h1>
 <p><img src="images/graphical_win.png" alt="" /></p>
 <p>We'll use the same graphical presentation, but modify it for multiple players.</p>
@@ -281,6 +281,8 @@ The function bug_report() provides bug reporting information.
                                       T
 </code></pre>
 <p><img src="images/single_prob_plot.png" alt="" /></p>
+<hr />
+<p>So probability goes down with increasing players (<em>n</em>) and up with increasing time (<em>T</em>).</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="single-letter-average-time"><a class="header" href="#single-letter-average-time">Single letter: average time</a></h1>
 <p><img src="images/timeline_win.png" alt="" /></p>
 <ul>
@@ -290,7 +292,11 @@ The function bug_report() provides bug reporting information.
 <li>Time when win is known is one second later = <em>x+1</em></li>
 </ul>
 </li>
-<li>Thge time must be normalized to the probablity</li>
+<li>This is <strong>the time given a win</strong> (no crash).
+<ul>
+<li>The time must be normalized to the probablity of a win</li>
+</ul>
+</li>
 </ul>
 <p>So \(p_{win}*t_{win}=\frac{n}{T} \int_{0}^{T-1} (x+1)(\frac{T-(x+1)}{T})^{n-1}{dx}=\frac{T+n}{n+1}(\frac{T-1}{T})^n=\frac{T+n}{n+1}p_{win}\)</p>
 <p>\(t_{win}=\frac{T+n}{n+1}\)</p>
@@ -301,6 +307,9 @@ The function bug_report() provides bug reporting information.
                                      n + 1
 </code></pre>
 <p><img src="images/single_time_plot.png" alt="" /></p>
+<hr />
+<p>So the time increases with longer interval time (<em>T</em>).
+The time <em>decreases</em> with increased players (<em>n</em>), since the first player's guess is more likely to be earlier.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="single-letter-crash"><a class="header" href="#single-letter-crash">Single letter crash</a></h1>
 <p><img src="images/graphical_loss.png" alt="" /></p>
 <p>We'll use the same graphical presentation as the win.</p>
@@ -452,6 +461,16 @@ negative;
 <p>\(\sum_{i=0}^{M-1}{p_{win}}^i = \frac{1-{p_{win}}^M}{1-p_{win}} = \frac{1-{p_{win}}^M}{p_{loss}}\)</p>
 <p>So:</p>
 <p>\(Quantity = \sum_{i=0}^{M-1}{p_{win}}^ip_{loss}i\,q_{win}+\sum_{i=0}^{M-1}{p_{win}}^ip_{loss}q_{loss}+\sum_{i=0}^{M-1}{p_{win}}^ip_{loss}Quantity+{p_{win}}^M(M\,q_{win})\)</p>
+<p>Becomes:</p>
+<p>\(Quantity = \sum_{i=0}^{M-1}{p_{win}}^ip_{loss}i\,q_{win}+(1-{p_{win}}^M)q_{loss}+(1-{p_{win}}^M)Quantity+{p_{win}}^M(M\,q_{win})\)</p>
+<p>Solving for <em>Quantity</em></p>
+<p>\({p_{win}}^M Quantity = q_{win}\,p_{loss}\sum_{i=0}^{M-1}{i\,{p_{win}}^i}+q_{loss}\,(1-{p_{win}}^M)+M\,q_{win}{p_{win}}^M\)</p>
+<p>The series i*p^i also has a closed-form expression:</p>
+<p>\(\sum_{i=0}^{M-1}{i\,{p_{win}}^i} = \frac{(M-1){p_{win}}^{M+1}-M{p_{win}}^M+p_win}{(1-p_{win})^2}\)</p>
+<p>Substituting and conbining with the last term:</p>
+<p>\({p_{win}}^M Quantity = q_{win}\frac{p_{win}-{p_{win}}^{M+1}}{1-p_{win}}+q_{loss}\,(1-{p_{win}}^M)\)</p>
+<p>Alternatively:</p>
+<p>\(Quantity = \left(\frac{1-{p_{win}}^M}{{p_{win}}^M}\right)\left(q_{loss}+\frac{p_{win}}{1-p_{win}}q_{win}\right)\)</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="full-alphabet-probability"><a class="header" href="#full-alphabet-probability">Full Alphabet: Probability</a></h1>
 <p>We expect this to be <em>1</em> since the game rules are to keep restarting until a victory</p>
 <p>\(Quantity = \sum_{i=0}^{M-1}p_{win}^ip_{loss}(i\,q_{win}+q_{loss}+Quantity)+p_{win}^M(M\,q_{win})\)</p>

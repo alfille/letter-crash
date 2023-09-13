@@ -199,6 +199,16 @@
 <p>\(\sum_{i=0}^{M-1}{p_{win}}^i = \frac{1-{p_{win}}^M}{1-p_{win}} = \frac{1-{p_{win}}^M}{p_{loss}}\)</p>
 <p>So:</p>
 <p>\(Quantity = \sum_{i=0}^{M-1}{p_{win}}^ip_{loss}i\,q_{win}+\sum_{i=0}^{M-1}{p_{win}}^ip_{loss}q_{loss}+\sum_{i=0}^{M-1}{p_{win}}^ip_{loss}Quantity+{p_{win}}^M(M\,q_{win})\)</p>
+<p>Becomes:</p>
+<p>\(Quantity = \sum_{i=0}^{M-1}{p_{win}}^ip_{loss}i\,q_{win}+(1-{p_{win}}^M)q_{loss}+(1-{p_{win}}^M)Quantity+{p_{win}}^M(M\,q_{win})\)</p>
+<p>Solving for <em>Quantity</em></p>
+<p>\({p_{win}}^M Quantity = q_{win}\,p_{loss}\sum_{i=0}^{M-1}{i\,{p_{win}}^i}+q_{loss}\,(1-{p_{win}}^M)+M\,q_{win}{p_{win}}^M\)</p>
+<p>The series i*p^i also has a closed-form expression:</p>
+<p>\(\sum_{i=0}^{M-1}{i\,{p_{win}}^i} = \frac{(M-1){p_{win}}^{M+1}-M{p_{win}}^M+p_win}{(1-p_{win})^2}\)</p>
+<p>Substituting and conbining with the last term:</p>
+<p>\({p_{win}}^M Quantity = q_{win}\frac{p_{win}-{p_{win}}^{M+1}}{1-p_{win}}+q_{loss}\,(1-{p_{win}}^M)\)</p>
+<p>Alternatively:</p>
+<p>\(Quantity = \left(\frac{1-{p_{win}}^M}{{p_{win}}^M}\right)\left(q_{loss}+\frac{p_{win}}{1-p_{win}}q_{win}\right)\)</p>
 
                     </main>
 

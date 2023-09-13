@@ -445,7 +445,13 @@ negative;
 </ul>
 </li>
 </ul>
-<p>\(Quantity = \sum_{i=0}^{M-1}p_{win}^ip_{loss}(i\,q_{win}+q_{loss}+Quantity)+p_{win}^M(M\,q_{win})\)</p>
+<p>\(Quantity = \sum_{i=0}^{M-1}{p_{win}}^ip_{loss}(i\,q_{win}+q_{loss}+Quantity)+{p_{win}}^M(M\,q_{win})\)</p>
+<p>Here <em>Quantity</em> is what we're assessing (like probability, time, ...) and the <em>q</em>'s are the quantity of the individual win or loss steps.</p>
+<hr />
+<p>We can do some simplification using the formula for a <a href="https://en.wikipedia.org/wiki/Geometric_series">geometric series</a></p>
+<p>\(\sum_{i=0}^{M-1}{p_{win}}^i = \frac{1-{p_{win}}^M}{1-p_{win}} = \frac{1-{p_{win}}^M}{p_{loss}}\)</p>
+<p>So:</p>
+<p>\(Quantity = \sum_{i=0}^{M-1}{p_{win}}^ip_{loss}i\,q_{win}+\sum_{i=0}^{M-1}{p_{win}}^ip_{loss}q_{loss}+\sum_{i=0}^{M-1}{p_{win}}^ip_{loss}Quantity+{p_{win}}^M(M\,q_{win})\)</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="full-alphabet-probability"><a class="header" href="#full-alphabet-probability">Full Alphabet: Probability</a></h1>
 <p>We expect this to be <em>1</em> since the game rules are to keep restarting until a victory</p>
 <p>\(Quantity = \sum_{i=0}^{M-1}p_{win}^ip_{loss}(i\,q_{win}+q_{loss}+Quantity)+p_{win}^M(M\,q_{win})\)</p>

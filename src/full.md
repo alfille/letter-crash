@@ -16,5 +16,17 @@ This means:
   * chance \\(p_{win}\^M\\)
   * *M* * wins
   
-\\(Quantity = \sum_{i=0}\^{M-1}p_{win}\^ip_{loss}(i\\,q_{win}+q_{loss}+Quantity)+p_{win}\^M(M\\,q_{win})\\)
+\\(Quantity = \sum_{i=0}\^{M-1}{p_{win}}\^ip_{loss}(i\\,q_{win}+q_{loss}+Quantity)+{p_{win}}\^M(M\\,q_{win})\\)
+
+Here *Quantity* is what we're assessing (like probability, time, ...) and the *q*'s are the quantity of the individual win or loss steps.
+
+----
+
+We can do some simplification using the formula for a [geometric series](https://en.wikipedia.org/wiki/Geometric_series)
+
+\\(\sum_{i=0}\^{M-1}{p_{win}}\^i = \frac{1-{p_{win}}^M}{1-p_{win}} = \frac{1-{p_{win}}^M}{p_{loss}}\\)
+
+So:
+
+\\(Quantity = \sum_{i=0}\^{M-1}{p_{win}}\^ip_{loss}i\\,q_{win}+\sum_{i=0}\^{M-1}{p_{win}}\^ip_{loss}q_{loss}+\sum_{i=0}\^{M-1}{p_{win}}\^ip_{loss}Quantity+{p_{win}}\^M(M\\,q_{win})\\)
 

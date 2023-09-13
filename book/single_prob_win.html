@@ -168,7 +168,44 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="probability"><a class="header" href="#probability">Probability</a></h1>
+                        <h1 id="single-letter-win-probability"><a class="header" href="#single-letter-win-probability">Single letter: Win probability</a></h1>
+<p><img src="images/timeline_win.png" alt="" /></p>
+<p>Take <em>n</em> randomly chosen times</p>
+<ul>
+<li>Assume first one is the lowest time (<em>1/n</em> chance)</li>
+<li>First time is <em>x</em>
+<ul>
+<li>chance is \(\frac{dx}{T}\)</li>
+</ul>
+</li>
+<li>Rest (<em>n-1</em> people) all after <em>x+1</em> seconds
+<ul>
+<li>0 if \(x &gt; T-1\)</li>
+<li>chance \(\frac{T-(x+1)}{T}\) for each</li>
+<li>chance \((\frac{T-(x+1)}{T})^{n-1}\) for all <em>n-1</em></li>
+<li><em>n</em> different players could be first</li>
+</ul>
+</li>
+</ul>
+<p>So \(p_{win}=\frac{n}{T} \int_{0}^{T-1} (\frac{T-(x+1)}{T})^{n-1}{dx}=(\frac{T-1}{T})^n\)</p>
+<hr />
+<pre><code>Maxima 5.44.0 http://maxima.sourceforge.net
+using Lisp GNU Common Lisp (GCL) GCL 2.6.12
+Distributed under the GNU Public License. See the file COPYING.
+Dedicated to the memory of William Schelter.
+The function bug_report() provides bug reporting information.
+(%i1) assume (n&gt;1);
+(%o1)                               [n &gt; 1]
+(%i2) assume (T&gt;1);
+(%o2)                               [T &gt; 1]
+(%i3) (n/T) * integrate( ( (T-(x+1) ) / T ) ^ (n-1) , x, 0, T-1) ,factor ;
+                                          n
+                                   (T - 1)
+(%o3)                              --------
+                                       n
+                                      T
+</code></pre>
+<p><img src="images/single_prob_plot.png" alt="" /></p>
 
                     </main>
 

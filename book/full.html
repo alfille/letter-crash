@@ -169,6 +169,30 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="full-alphabet"><a class="header" href="#full-alphabet">Full Alphabet</a></h1>
+<p>The game is not just a single letter, but an alphabet of <em>M</em> letters, with restarts after any crashes.</p>
+<p>To solve, we'll use a general &quot;recurrence&quot; approach:</p>
+<p>This means:</p>
+<ul>
+<li>We sum over all the lengths of <em>wins &lt; M</em> with then a loss
+<ul>
+<li>chance is \(p_{win}^i\,p_{loss}\)</li>
+<li>contribution to whatever quantity is
+<ul>
+<li>i * wins</li>
+<li>1 loss</li>
+<li>Game expected quantity (for restart)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>and add the <em>M</em> straight wins case
+<ul>
+<li>chance \(p_{win}^M\)</li>
+<li><em>M</em> * wins</li>
+</ul>
+</li>
+</ul>
+<p>\(Quantity = \sum_{i=0}^{M-1}p_{win}^ip_{loss}(i\,q_{win}+q_{loss}+Quantity)+p_{win}^M(M\,q_{win})\)</p>
 
                     </main>
 

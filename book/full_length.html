@@ -168,7 +168,31 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="length"><a class="header" href="#length">Length</a></h1>
+                        <h1 id="full-alphabet-length"><a class="header" href="#full-alphabet-length">Full Alphabet: Length</a></h1>
+<h1 id="full-alphabet-time"><a class="header" href="#full-alphabet-time">Full Alphabet: Time</a></h1>
+<p>How many letters, on average, will we go though?</p>
+<p>Now compute</p>
+<p>\(Quantity = \sum_{i=0}^{M-1}p_{win}^ip_{loss}(i\,q_{win}+q_{loss}+Quantity)+p_{win}^M(M\,q_{win})\)</p>
+<p>becomes:</p>
+<p>\(L = \sum_{i=0}^{M-1}p_{win}^i\,p_{loss}(i+1+L)+p_{win}^M(M)\)</p>
+<p>expanding:</p>
+<p>\(L = p_{loss}\sum_{i=0}^{M-1}i\,p_{win}^i+p_{loss}\sum_{i=0}^{M-1}p_{win}^i+p_{loss}L\sum_{i=0}^{M-1}p_{win}^i+Mp_{win}^M\)</p>
+<p>now:</p>
+<p>\(\sum_{i=0}^{M-1}p_{win}^i=\frac{1-p_{win}^M}{1-p_{win}}=\frac{1-p_{win}^M}{p_{loss}}\)</p>
+<p>and:</p>
+<p>\(\sum_{i=0}^{M-1}i\,p_{win}^i=\frac{(M-1)p_{win}^{M+1}-Mp_{win}^M+p_{win}}{(1-p_{win})^2}=\frac{(M-1)p_{win}^{M+1}-Mp_{win}^M+p_{win}}{(1-p_{win})p_{loss}}\)</p>
+<p>So:</p>
+<p>\(L = p_{loss}\sum_{i=0}^{M-1}i\,p_{win}^i+(1-p_{win}^M)+L(1-p_{win}^M)+Mp_{win}^M\)</p>
+<p>Move <em>L</em> terms:</p>
+<p>\(p_{win}^ML = p_{loss}\sum_{i=0}^{M-1}i\,p_{win}^i+1-p_{win}^M+Mp_{win}^M\)</p>
+<p>Expanding:</p>
+<p>\(p_{win}^ML = \frac{(M-1)p_{win}^{M+1}-Mp_{win}^M+p_{win}}{1-p_{win}}+1+(M-1)p_{win}^M\)</p>
+<p>\(p_{win}^ML = \frac{p_{win}-p_{win}^M}{1-p_{win}}+1\)</p>
+<p>\(p_{win}^ML = p_{win}^{M-1}+1\)</p>
+<p>\(L = p_{win}^{-1}+p_{win}^{-M}\)</p>
+<hr />
+<p>Not very well behaved. Plotting log(L)</p>
+<p><img src="images/full_length.png" alt="" /></p>
 
                     </main>
 

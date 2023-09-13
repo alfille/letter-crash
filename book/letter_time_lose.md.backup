@@ -43,4 +43,4 @@ or
 
 -----------
 
-\\(\lim_{T \to \infty} t_{loss}=\frac{2(n-1)}{n(n+1)}T\\)
+\\(\lim_{T \to \infty} t_{loss}=\frac{2(n-1)}{n+1}T\\)

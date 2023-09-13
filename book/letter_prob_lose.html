@@ -168,7 +168,48 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="probability"><a class="header" href="#probability">Probability</a></h1>
+                        <h1 id="single-letter-crash-probability"><a class="header" href="#single-letter-crash-probability">Single letter: Crash probability</a></h1>
+<p><img src="images/timeline_lose.png" alt="" /></p>
+<h3 id="expectation"><a class="header" href="#expectation">Expectation</a></h3>
+<p>\(p_{lose}=1-p_{win}\)</p>
+<p>let's prove it!</p>
+<h3 id="calculation"><a class="header" href="#calculation">Calculation</a></h3>
+<ul>
+<li>Let \(t_1=x\quad t_2=y\)</li>
+<li>Separate calculation for <em>x &lt; T-1</em> where <em>y</em> has full 1 second, and <em>x &gt; T-1</em> where <em>y</em> has shorter interval</li>
+</ul>
+<p>\(p_{lose}=\frac{n(n-1)}{T} \int_{0}^{T-1}\int_{x}^{x+1}(1/T)(\frac{T-y}{T})^{n-2}{dy} \,{dx}+\frac{n}{T} \int_{T-1}^{T}(\frac{T-x}{T})^{n-1}\,{dx}\)</p>
+<hr />
+<pre><code>(%i1) assume(n&gt;2);
+(%i2) assume(T&gt;1);
+(%i3) n*((n-1)/T^2)*integrate(integrate(((T-y)/T)^(n-2),y,x,x+1),x,0,T-1)+(n/T)*integrate(((T-x)/T)^(n-1),x,T-1,T);
+Is x - T positive, negative or zero?
+
+negative;
+                            log(T) n     log(T - 1) n
+               (n - 1) n (%e         - %e             - 1)   1
+(%o3)          ------------------------------------------- + --
+                                n   2                         n
+                               T  (n  - n)                   T
+(%i4) subst(T^n,%e^(log(T)*n),%);
+(%i5) subst((T-1)^n,%e^(log(T-1)*n),%);
+(%i6) %,factor;
+                                  n          n
+                                 T  - (T - 1)
+(%o6)                            -------------
+                                       n
+                                      T
+(%i7) 
+%,expand;
+                                            n
+                                     (T - 1)
+(%o7)                            1 - --------
+                                         n
+                                        T
+</code></pre>
+<p>So it works!</p>
+<hr />
+<p><img src="images/singleloss_prob_plot.png" alt="" /></p>
 
                     </main>
 

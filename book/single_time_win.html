@@ -168,7 +168,26 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="time"><a class="header" href="#time">Time</a></h1>
+                        <h1 id="single-letter-average-time"><a class="header" href="#single-letter-average-time">Single letter: average time</a></h1>
+<p><img src="images/timeline_win.png" alt="" /></p>
+<ul>
+<li>Using the assumptions from the previous page where \(p_{win}=(\frac{T-1}{T})^n\)
+<ul>
+<li>For first time = <em>x</em></li>
+<li>Time when win is known is one second later = <em>x+1</em></li>
+</ul>
+</li>
+<li>Thge time must be normalized to the probablity</li>
+</ul>
+<p>So \(p_{win}*t_{win}=\frac{n}{T} \int_{0}^{T-1} (x+1)(\frac{T-(x+1)}{T})^{n-1}{dx}=\frac{T+n}{n+1}(\frac{T-1}{T})^n=\frac{T+n}{n+1}p_{win}\)</p>
+<p>\(t_{win}=\frac{T+n}{n+1}\)</p>
+<hr />
+<pre><code>twin:(n/T)*integrate((x+1)*(T-(x+1))^(n-1)/T^(n-1),x,0,T-1)/pwin,expand,factor;
+                                     n + T
+(%o7)                                -----
+                                     n + 1
+</code></pre>
+<p><img src="images/single_time_plot.png" alt="" /></p>
 
                     </main>
 

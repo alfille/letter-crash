@@ -168,7 +168,18 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="probability"><a class="header" href="#probability">Probability</a></h1>
+                        <h1 id="full-alphabet-probability"><a class="header" href="#full-alphabet-probability">Full Alphabet: Probability</a></h1>
+<p>We expect this to be <em>1</em> since the game rules are to keep restarting until a victory</p>
+<p>\(Quantity = \sum_{i=0}^{M-1}p_{win}^ip_{loss}(i\,q_{win}+q_{loss}+Quantity)+p_{win}^M(M\,q_{win})\)</p>
+<p>becomes:</p>
+<p>\(P = \sum_{i=0}^{M-1}p_{win}^ip_{loss}(P)+p_{win}^M(1)\)</p>
+<p>\(P = (\sum_{i=0}^{M-1}p_{win}^i)p_{loss}(P)+p_{win}^M\)</p>
+<p>\(P = (\frac{1-p_{win}^M}{1-p_{win}})p_{loss}(P)+p_{win}^M\)</p>
+<p>\(P = (\frac{1-p_{win}^M}{p_{loss}})p_{loss}(P)+p_{win}^M\)</p>
+<p>\(P = (1-p_{win}^M)(P)+p_{win}^M\)</p>
+<p>\(P = P-p_{win}^MP+p_{win}^M\)</p>
+<p>\(p_{win}^MP=p_{win}^M\)</p>
+<p>\(P=1\)</p>
 
                     </main>
 

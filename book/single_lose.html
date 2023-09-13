@@ -169,6 +169,35 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="single-letter-crash"><a class="header" href="#single-letter-crash">Single letter crash</a></h1>
+<p><img src="images/graphical_loss.png" alt="" /></p>
+<p>We'll use the same graphical presentation as the win.</p>
+<ul>
+<li><em>n</em> random times from 0 to <em>T</em></li>
+<li>&quot;choose&quot; the first one</li>
+<li>&quot;choose&quot; the second one</li>
+<li>Is the second &lt; 1 second after the first? (a <strong>crash</strong>)</li>
+<li>Are all the others after the second?</li>
+</ul>
+<h3 id="sorted-order-t1--t-1"><a class="header" href="#sorted-order-t1--t-1">Sorted order (<em>t1 &lt; T-1</em>)</a></h3>
+<p>Take n times sorted:</p>
+<p>\([t_1,t_2,...t_n]\)</p>
+<p>Chance second is in &quot;crash&quot; interval:</p>
+<p>\(\frac{1}{T}\quad\text{if  }t_1&lt;{T-1}\)</p>
+<p>Chance rest are after second:</p>
+<p>\((\frac{T-t_2}{T})^{n-2}\quad\text{for all  }t_2\)</p>
+<h3 id="sorted-order-t1--t-1-1"><a class="header" href="#sorted-order-t1--t-1-1">Sorted order (<em>t1 &gt; T-1</em>)</a></h3>
+<p>Take n times sorted:</p>
+<p>\([t_1,t_2,...t_n]\)</p>
+<p>Chance first is in last second:</p>
+<p>\(\frac{1}{T}\)</p>
+<p>Change rest are after first</p>
+<p>\((\frac{T-x}{T})^{n-1}\)</p>
+<h3 id="unsorted-t1--t-1"><a class="header" href="#unsorted-t1--t-1">Unsorted (<em>t1 &lt; T-1</em>)</a></h3>
+<p>There are <em>n!</em> ways to choose the the order, but we only care about the first two, and the rest can be in any order.</p>
+<p>Thus \(\binom{n}{2}=n(n-1)\)</p>
+<h3 id="unsorted-t1--t-1-1"><a class="header" href="#unsorted-t1--t-1-1">Unsorted (<em>t1 &gt; T-1</em>)</a></h3>
+<p>There are <em>n!</em> ways to choose the the order, but we only care about the first one, and the rest can be in any order.</p>
+<p>Thus \(\binom{n}{1}=n\)</p>
 
                     </main>
 

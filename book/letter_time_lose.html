@@ -168,7 +168,54 @@
 
                 <div id="content" class="content">
                     <main>
-                        <h1 id="time"><a class="header" href="#time">Time</a></h1>
+                        <h1 id="single-letter-crash-average-time"><a class="header" href="#single-letter-crash-average-time">Single letter crash: Average time</a></h1>
+<p><img src="images/timeline_lose.png" alt="" /></p>
+<h3 id="calculation"><a class="header" href="#calculation">Calculation</a></h3>
+<ul>
+<li>
+<p>Let \(t_1=x\quad t_2=y\)</p>
+</li>
+<li>
+<p>Separate calculation for <em>x &lt; T-1</em> where <em>y</em> has full 1 second, and <em>x &gt; T-1</em> where <em>y</em> has shorter interval</p>
+</li>
+<li>
+<p><em>x &lt; T-1</em></p>
+<ul>
+<li>time of loss = <em>y</em></li>
+</ul>
+</li>
+<li>
+<p><em>x &gt; T-1</em></p>
+<ul>
+<li>time of loss = <em>T-1</em></li>
+</ul>
+</li>
+<li>
+<p>Again need to normalize by \(p_{loss}\)</p>
+</li>
+</ul>
+<p>\(p_{loss}*t_{loss}=\frac{n(n-1)}{T} \int_{0}^{T-1}\int_{x}^{x+1}(1/T)y(\frac{T-y}{T})^{n-2}{dy} \,{dx}+\frac{n}{T} \int_{T-1}^{T}(T-1)(\frac{T-x}{T})^{n-1}\,{dx}\)</p>
+<p>\(\)</p>
+<hr />
+<pre><code>(%i14) unnormalized_tloss:n*(n-1)*T^(-n)*integrate(integrate(y*(T-y)^(n-2),y,x,x+1),x,0,T-1)+n*T^(-n)*(T-1)*integrate((T-x)^(n-1),x,T-1,T);
+(%i15) subst((T-1)^n,%e^(log(T-1)*n),%);
+(%i16) subst(T^n,%e^(log(T)*n),%);
+(%i17) %,factor;
+(%i18) tloss:%/(1-pwin);
+(%i19) %,factor;
+                      n        n + 1            n            n
+               (T - 1)  n - 2 T      + 2 (T - 1)  T - (T - 1)  + 2
+(%o19)       - ---------------------------------------------------
+                               n          n
+                             (T  - (T - 1) ) (n + 1)
+</code></pre>
+<p>\(t_{loss}=-{{\left(T-1\right)^{n}\,n-2 \,T^{n+1}+2\,\left(T-1\right)^{n}\,T- \left(T-1\right)^{n}+2}\over{\left(T^{n}-\left(T-1\right)^{n}\right) \,\left(n+1\right)}}\)</p>
+<p>or</p>
+<p>\(t_{loss}=\frac{2\,T}{n+1}-\frac{2\,+\,(n-1)(T-1)^n}{(n+1)(T^n-(T-1)^n)}\)</p>
+<hr />
+<p><img src="images/singleloss_time_plot.png" alt="" /></p>
+<hr />
+<p>\(\lim_{T \to \infty} t_{loss}=\frac{2(n-1)}{n(n+1)}T\)</p>
 
                     </main>
 

@@ -39,5 +39,5 @@ Expanding:
 Finally:
 
 
-\\(Time = p_{win}^{-M}\left(t_{win}\frac{p_{win}-p_{win}^{M+1}-(M-1)p_{win}^M}{1-p_{win}}+t_{loss}(1-p_{win}\^M)\right)\\)
+\\(Time = t_{win}p_{win}^{-M}\left(\frac{p_{win}-p_{win}^{M+1}-(M-1)p_{win}^M}{1-p_{win}}+t_{loss}(1-p_{win}\^M)\right)\\)
  

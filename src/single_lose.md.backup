@@ -37,14 +37,9 @@ Change rest are after first
 
 \\((\frac{T-x}{T})\^{n-1}\\)
 
-### Unsorted (*t1 < T-1*)
+
+### Unsorted
 
 There are *n!* ways to choose the the order, but we only care about the first two, and the rest can be in any order.
 
 Thus \\(\binom{n}{2}=n(n-1)\\)
-
-### Unsorted (*t1 > T-1*)
-
-There are *n!* ways to choose the the order, but we only care about the first one, and the rest can be in any order.
-
-Thus \\(\binom{n}{1}=n\\)

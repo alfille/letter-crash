@@ -243,15 +243,267 @@
 <h3 id="unsorted"><a class="header" href="#unsorted">Unsorted</a></h3>
 <p>There are <em>n!</em> ways to choose the the order, but we only care about the first one, and the rest can be in any order.</p>
 <p>Thus \(\binom{n}{1}=n\)</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="probability"><a class="header" href="#probability">Probability</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="time"><a class="header" href="#time">Time</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="single-letter-win-probability"><a class="header" href="#single-letter-win-probability">Single letter: Win probability</a></h1>
+<p><img src="images/timeline_win.png" alt="" /></p>
+<p>Take <em>n</em> randomly chosen times</p>
+<ul>
+<li>Assume first one is the lowest time (<em>1/n</em> chance)</li>
+<li>First time is <em>x</em>
+<ul>
+<li>chance is \(\frac{dx}{T}\)</li>
+</ul>
+</li>
+<li>Rest (<em>n-1</em> people) all after <em>x+1</em> seconds
+<ul>
+<li>0 if \(x &gt; T-1\)</li>
+<li>chance \(\frac{T-(x+1)}{T}\) for each</li>
+<li>chance \((\frac{T-(x+1)}{T})^{n-1}\) for all <em>n-1</em></li>
+<li><em>n</em> different players could be first</li>
+</ul>
+</li>
+</ul>
+<p>So \(p_{win}=\frac{n}{T} \int_{0}^{T-1} (\frac{T-(x+1)}{T})^{n-1}{dx}=(\frac{T-1}{T})^n\)</p>
+<hr />
+<pre><code>Maxima 5.44.0 http://maxima.sourceforge.net
+using Lisp GNU Common Lisp (GCL) GCL 2.6.12
+Distributed under the GNU Public License. See the file COPYING.
+Dedicated to the memory of William Schelter.
+The function bug_report() provides bug reporting information.
+(%i1) assume (n&gt;1);
+(%o1)                               [n &gt; 1]
+(%i2) assume (T&gt;1);
+(%o2)                               [T &gt; 1]
+(%i3) (n/T) * integrate( ( (T-(x+1) ) / T ) ^ (n-1) , x, 0, T-1) ,factor ;
+                                          n
+                                   (T - 1)
+(%o3)                              --------
+                                       n
+                                      T
+</code></pre>
+<p><img src="images/single_prob_plot.png" alt="" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="single-letter-average-time"><a class="header" href="#single-letter-average-time">Single letter: average time</a></h1>
+<p><img src="images/timeline_win.png" alt="" /></p>
+<ul>
+<li>Using the assumptions from the previous page where \(p_{win}=(\frac{T-1}{T})^n\)
+<ul>
+<li>For first time = <em>x</em></li>
+<li>Time when win is known is one second later = <em>x+1</em></li>
+</ul>
+</li>
+<li>Thge time must be normalized to the probablity</li>
+</ul>
+<p>So \(p_{win}*t_{win}=\frac{n}{T} \int_{0}^{T-1} (x+1)(\frac{T-(x+1)}{T})^{n-1}{dx}=\frac{T+n}{n+1}(\frac{T-1}{T})^n=\frac{T+n}{n+1}p_{win}\)</p>
+<p>\(t_{win}=\frac{T+n}{n+1}\)</p>
+<hr />
+<pre><code>twin:(n/T)*integrate((x+1)*(T-(x+1))^(n-1)/T^(n-1),x,0,T-1)/pwin,expand,factor;
+                                     n + T
+(%o7)                                -----
+                                     n + 1
+</code></pre>
+<p><img src="images/single_time_plot.png" alt="" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="single-letter-crash"><a class="header" href="#single-letter-crash">Single letter crash</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="probability-1"><a class="header" href="#probability-1">Probability</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="time-1"><a class="header" href="#time-1">Time</a></h1>
+<p><img src="images/graphical_loss.png" alt="" /></p>
+<p>We'll use the same graphical presentation as the win.</p>
+<ul>
+<li><em>n</em> random times from 0 to <em>T</em></li>
+<li>&quot;choose&quot; the first one</li>
+<li>&quot;choose&quot; the second one</li>
+<li>Is the second &lt; 1 second after the first? (a <strong>crash</strong>)</li>
+<li>Are all the others after the second?</li>
+</ul>
+<h3 id="sorted-order-t1--t-1"><a class="header" href="#sorted-order-t1--t-1">Sorted order (<em>t1 &lt; T-1</em>)</a></h3>
+<p>Take n times sorted:</p>
+<p>\([t_1,t_2,...t_n]\)</p>
+<p>Chance second is in &quot;crash&quot; interval:</p>
+<p>\(\frac{1}{T}\quad\text{if  }t_1&lt;{T-1}\)</p>
+<p>Chance rest are after second:</p>
+<p>\((\frac{T-t_2}{T})^{n-2}\quad\text{for all  }t_2\)</p>
+<h3 id="sorted-order-t1--t-1-1"><a class="header" href="#sorted-order-t1--t-1-1">Sorted order (<em>t1 &gt; T-1</em>)</a></h3>
+<p>Take n times sorted:</p>
+<p>\([t_1,t_2,...t_n]\)</p>
+<p>Chance first is in last second:</p>
+<p>\(\frac{1}{T}\)</p>
+<p>Change rest are after first</p>
+<p>\((\frac{T-x}{T})^{n-1}\)</p>
+<h3 id="unsorted-t1--t-1"><a class="header" href="#unsorted-t1--t-1">Unsorted (<em>t1 &lt; T-1</em>)</a></h3>
+<p>There are <em>n!</em> ways to choose the the order, but we only care about the first two, and the rest can be in any order.</p>
+<p>Thus \(\binom{n}{2}=n(n-1)\)</p>
+<h3 id="unsorted-t1--t-1-1"><a class="header" href="#unsorted-t1--t-1-1">Unsorted (<em>t1 &gt; T-1</em>)</a></h3>
+<p>There are <em>n!</em> ways to choose the the order, but we only care about the first one, and the rest can be in any order.</p>
+<p>Thus \(\binom{n}{1}=n\)</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="single-letter-crash-probability"><a class="header" href="#single-letter-crash-probability">Single letter: Crash probability</a></h1>
+<p><img src="images/timeline_lose.png" alt="" /></p>
+<h3 id="expectation"><a class="header" href="#expectation">Expectation</a></h3>
+<p>\(p_{lose}=1-p_{win}\)</p>
+<p>let's prove it!</p>
+<h3 id="calculation"><a class="header" href="#calculation">Calculation</a></h3>
+<ul>
+<li>Let \(t_1=x\quad t_2=y\)</li>
+<li>Separate calculation for <em>x &lt; T-1</em> where <em>y</em> has full 1 second, and <em>x &gt; T-1</em> where <em>y</em> has shorter interval</li>
+</ul>
+<p>\(p_{lose}=\frac{n(n-1)}{T} \int_{0}^{T-1}\int_{x}^{x+1}(1/T)(\frac{T-y}{T})^{n-2}{dy} \,{dx}+\frac{n}{T} \int_{T-1}^{T}(\frac{T-x}{T})^{n-1}\,{dx}\)</p>
+<hr />
+<pre><code>(%i1) assume(n&gt;2);
+(%i2) assume(T&gt;1);
+(%i3) n*((n-1)/T^2)*integrate(integrate(((T-y)/T)^(n-2),y,x,x+1),x,0,T-1)+(n/T)*integrate(((T-x)/T)^(n-1),x,T-1,T);
+Is x - T positive, negative or zero?
+
+negative;
+                            log(T) n     log(T - 1) n
+               (n - 1) n (%e         - %e             - 1)   1
+(%o3)          ------------------------------------------- + --
+                                n   2                         n
+                               T  (n  - n)                   T
+(%i4) subst(T^n,%e^(log(T)*n),%);
+(%i5) subst((T-1)^n,%e^(log(T-1)*n),%);
+(%i6) %,factor;
+                                  n          n
+                                 T  - (T - 1)
+(%o6)                            -------------
+                                       n
+                                      T
+(%i7) 
+%,expand;
+                                            n
+                                     (T - 1)
+(%o7)                            1 - --------
+                                         n
+                                        T
+</code></pre>
+<p>So it works!</p>
+<hr />
+<p><img src="images/singleloss_prob_plot.png" alt="" /></p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="single-letter-crash-average-time"><a class="header" href="#single-letter-crash-average-time">Single letter crash: Average time</a></h1>
+<p><img src="images/timeline_lose.png" alt="" /></p>
+<h3 id="calculation-1"><a class="header" href="#calculation-1">Calculation</a></h3>
+<ul>
+<li>
+<p>Let \(t_1=x\quad t_2=y\)</p>
+</li>
+<li>
+<p>Separate calculation for <em>x &lt; T-1</em> where <em>y</em> has full 1 second, and <em>x &gt; T-1</em> where <em>y</em> has shorter interval</p>
+</li>
+<li>
+<p><em>x &lt; T-1</em></p>
+<ul>
+<li>time of loss = <em>y</em></li>
+</ul>
+</li>
+<li>
+<p><em>x &gt; T-1</em></p>
+<ul>
+<li>time of loss = <em>T-1</em></li>
+</ul>
+</li>
+<li>
+<p>Again need to normalize by \(p_{loss}\)</p>
+</li>
+</ul>
+<p>\(p_{loss}*t_{loss}=\frac{n(n-1)}{T} \int_{0}^{T-1}\int_{x}^{x+1}(1/T)y(\frac{T-y}{T})^{n-2}{dy} \,{dx}+\frac{n}{T} \int_{T-1}^{T}(T-1)(\frac{T-x}{T})^{n-1}\,{dx}\)</p>
+<p>\(\)</p>
+<hr />
+<pre><code>(%i14) unnormalized_tloss:n*(n-1)*T^(-n)*integrate(integrate(y*(T-y)^(n-2),y,x,x+1),x,0,T-1)+n*T^(-n)*(T-1)*integrate((T-x)^(n-1),x,T-1,T);
+(%i15) subst((T-1)^n,%e^(log(T-1)*n),%);
+(%i16) subst(T^n,%e^(log(T)*n),%);
+(%i17) %,factor;
+(%i18) tloss:%/(1-pwin);
+(%i19) %,factor;
+                      n        n + 1            n            n
+               (T - 1)  n - 2 T      + 2 (T - 1)  T - (T - 1)  + 2
+(%o19)       - ---------------------------------------------------
+                               n          n
+                             (T  - (T - 1) ) (n + 1)
+</code></pre>
+<p>\(t_{loss}=-{{\left(T-1\right)^{n}\,n-2 \,T^{n+1}+2\,\left(T-1\right)^{n}\,T- \left(T-1\right)^{n}+2}\over{\left(T^{n}-\left(T-1\right)^{n}\right) \,\left(n+1\right)}}\)</p>
+<p>or</p>
+<p>\(t_{loss}=\frac{2\,T}{n+1}-\frac{2\,+\,(n-1)(T-1)^n}{(n+1)(T^n-(T-1)^n)}\)</p>
+<hr />
+<p><img src="images/singleloss_time_plot.png" alt="" /></p>
+<hr />
+<p>\(\lim_{T \to \infty} t_{loss}=\frac{2(n-1)}{n(n+1)}T\)</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="full-alphabet"><a class="header" href="#full-alphabet">Full Alphabet</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="probability-2"><a class="header" href="#probability-2">Probability</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="time-2"><a class="header" href="#time-2">Time</a></h1>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="length"><a class="header" href="#length">Length</a></h1>
+<p>The game is not just a single letter, but an alphabet of <em>M</em> letters, with restarts after any crashes.</p>
+<p>To solve, we'll use a general &quot;recurrence&quot; approach:</p>
+<p>This means:</p>
+<ul>
+<li>We sum over all the lengths of <em>wins &lt; M</em> with then a loss
+<ul>
+<li>chance is \(p_{win}^i\,p_{loss}\)</li>
+<li>contribution to whatever quantity is
+<ul>
+<li>i * wins</li>
+<li>1 loss</li>
+<li>Game expected quantity (for restart)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>and add the <em>M</em> straight wins case
+<ul>
+<li>chance \(p_{win}^M\)</li>
+<li><em>M</em> * wins</li>
+</ul>
+</li>
+</ul>
+<p>\(Quantity = \sum_{i=0}^{M-1}p_{win}^ip_{loss}(i\,q_{win}+q_{loss}+Quantity)+p_{win}^M(M\,q_{win})\)</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="full-alphabet-probability"><a class="header" href="#full-alphabet-probability">Full Alphabet: Probability</a></h1>
+<p>We expect this to be <em>1</em> since the game rules are to keep restarting until a victory</p>
+<p>\(Quantity = \sum_{i=0}^{M-1}p_{win}^ip_{loss}(i\,q_{win}+q_{loss}+Quantity)+p_{win}^M(M\,q_{win})\)</p>
+<p>becomes:</p>
+<p>\(P = \sum_{i=0}^{M-1}p_{win}^ip_{loss}(P)+p_{win}^M(1)\)</p>
+<p>\(P = (\sum_{i=0}^{M-1}p_{win}^i)p_{loss}(P)+p_{win}^M\)</p>
+<p>\(P = (\frac{1-p_{win}^M}{1-p_{win}})p_{loss}(P)+p_{win}^M\)</p>
+<p>\(P = (\frac{1-p_{win}^M}{p_{loss}})p_{loss}(P)+p_{win}^M\)</p>
+<p>\(P = (1-p_{win}^M)(P)+p_{win}^M\)</p>
+<p>\(P = P-p_{win}^MP+p_{win}^M\)</p>
+<p>\(p_{win}^MP=p_{win}^M\)</p>
+<p>\(P=1\)</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="full-alphabet-time"><a class="header" href="#full-alphabet-time">Full Alphabet: Time</a></h1>
+<p>We already know the average time for a win or loss for each step (letter): \(t_{win},t_{loss}\)</p>
+<p>Now compute</p>
+<p>\(Quantity = \sum_{i=0}^{M-1}p_{win}^ip_{loss}(i\,q_{win}+q_{loss}+Quantity)+p_{win}^M(M\,q_{win})\)</p>
+<p>becomes:</p>
+<p>\(Time = \sum_{i=0}^{M-1}p_{win}^i\,p_{loss}(i\,t_{win}+t_{loss}+Time)+p_{win}^M(Mt_{win})\)</p>
+<p>expanding:</p>
+<p>\(Time = p_{loss}t_{win}\sum_{i=0}^{M-1}i\,p_{win}^i+p_{loss}t_{loss}\sum_{i=0}^{M-1}p_{win}^i+p_{loss}Time\sum_{i=0}^{M-1}p_{win}^i+p_{win}^M(Mt_{win})\)</p>
+<p>now:</p>
+<p>\(\sum_{i=0}^{M-1}p_{win}^i=\frac{1-p_{win}^M}{1-p_{win}}=\frac{1-p_{win}^M}{p_{loss}}\)</p>
+<p>and:</p>
+<p>\(\sum_{i=0}^{M-1}i\,p_{win}^i=\frac{(M-1)p_{win}^{M+1}-Mp_{win}^M+p_{win}}{(1-p_{win})^2}=\frac{(M-1)p_{win}^{M+1}-Mp_{win}^M+p_{win}}{(1-p_{win})p_{loss}}\)</p>
+<p>So:</p>
+<p>\(Time = p_{loss}t_{win}\sum_{i=0}^{M-1}i\,p_{win}^i+t_{loss}(1-p_{win}^M)+Time(1-p_{win}^M)+p_{win}^M(Mt_{win})\)</p>
+<p>Move <em>Time</em> terms:</p>
+<p>\(p_{win}^MTime = p_{loss}t_{win}\sum_{i=0}^{M-1}i\,p_{win}^i+t_{loss}(1-p_{win}^M)+p_{win}^M(Mt_{win})\)</p>
+<p>Expanding:</p>
+<p>\(p_{win}^MTime = t_{win}\frac{(M-1)p_{win}^{M+1}-Mp_{win}^M+p_{win}}{1-p_{win}}+t_{loss}(1-p_{win}^M)+Mt_{win}p_{win}^M\)</p>
+<p>\(p_{win}^MTime = t_{win}\frac{p_{win}-p_{win}^{M+1}-(M-1)p_{win}^M}{1-p_{win}}+t_{loss}(1-p_{win}^M)\)</p>
+<p>Finally:</p>
+<p>\(Time = p_{win}^{-M}\left(t_{win}\frac{p_{win}-p_{win}^{M+1}-(M-1)p_{win}^M}{1-p_{win}}+t_{loss}(1-p_{win}^M)\right)\)</p>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="full-alphabet-length"><a class="header" href="#full-alphabet-length">Full Alphabet: Length</a></h1>
+<h1 id="full-alphabet-time-1"><a class="header" href="#full-alphabet-time-1">Full Alphabet: Time</a></h1>
+<p>How many letters, on average, will we go though?</p>
+<p>Now compute</p>
+<p>\(Quantity = \sum_{i=0}^{M-1}p_{win}^ip_{loss}(i\,q_{win}+q_{loss}+Quantity)+p_{win}^M(M\,q_{win})\)</p>
+<p>becomes:</p>
+<p>\(L = \sum_{i=0}^{M-1}p_{win}^i\,p_{loss}(i+1+L)+p_{win}^M(M)\)</p>
+<p>expanding:</p>
+<p>\(L = p_{loss}\sum_{i=0}^{M-1}i\,p_{win}^i+p_{loss}\sum_{i=0}^{M-1}p_{win}^i+p_{loss}L\sum_{i=0}^{M-1}p_{win}^i+Mp_{win}^M\)</p>
+<p>now:</p>
+<p>\(\sum_{i=0}^{M-1}p_{win}^i=\frac{1-p_{win}^M}{1-p_{win}}=\frac{1-p_{win}^M}{p_{loss}}\)</p>
+<p>and:</p>
+<p>\(\sum_{i=0}^{M-1}i\,p_{win}^i=\frac{(M-1)p_{win}^{M+1}-Mp_{win}^M+p_{win}}{(1-p_{win})^2}=\frac{(M-1)p_{win}^{M+1}-Mp_{win}^M+p_{win}}{(1-p_{win})p_{loss}}\)</p>
+<p>So:</p>
+<p>\(L = p_{loss}\sum_{i=0}^{M-1}i\,p_{win}^i+(1-p_{win}^M)+L(1-p_{win}^M)+Mp_{win}^M\)</p>
+<p>Move <em>L</em> terms:</p>
+<p>\(p_{win}^ML = p_{loss}\sum_{i=0}^{M-1}i\,p_{win}^i+1-p_{win}^M+Mp_{win}^M\)</p>
+<p>Expanding:</p>
+<p>\(p_{win}^ML = \frac{(M-1)p_{win}^{M+1}-Mp_{win}^M+p_{win}}{1-p_{win}}+1+(M-1)p_{win}^M\)</p>
+<p>\(p_{win}^ML = \frac{p_{win}-p_{win}^M}{1-p_{win}}+1\)</p>
+<p>\(p_{win}^ML = p_{win}^{M-1}+1\)</p>
+<p>\(L = p_{win}^{-1}+p_{win}^{-M}\)</p>
+<hr />
+<p>Not very well behaved. Plotting log(L)</p>
+<p><img src="images/full_length.png" alt="" /></p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="simplification"><a class="header" href="#simplification">Simplification</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="answers"><a class="header" href="#answers">Answers</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="symbolic"><a class="header" href="#symbolic">Symbolic</a></h1>

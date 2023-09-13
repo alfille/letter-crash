@@ -4,6 +4,8 @@ The game is not just a single letter, but an alphabet of *M* letters, with resta
 
 To solve, we'll use a general "recurrence" approach:
 
+\\(Quantity = \sum_{i=0}\^{M-1}p_{win}\^ip_{loss}(i\\,q_{win}+q_{loss}+Quantity)+p_{win}\^M(M\\,q_{win})\\)
+
 This means:
 
 * We sum over all the lengths of *wins < M* with then a loss
@@ -14,7 +16,4 @@ This means:
     * Game expected quantity (for restart)
 * and add the *M* straight wins case
   * chance \\(p_{win}\^M\\)
-  * *M* * wins
-  
-\\(Quantity = \sum_{i=0}\^{M-1}p_{win}\^ip_{loss}(i\\,q_{win}+q_{loss}+Quantity)+p_{win}\^M(M\\,q_{win})\\)
-
+  * M  wins*

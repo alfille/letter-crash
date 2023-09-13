@@ -10,7 +10,7 @@
 
 Each player chooses a time randomly (and uniformly) in the interval 0 to *T* seconds.
 
-If no other player chooses a time less than 1 second after the first time chosen, the ste is **won**
+If no other player chooses a time less than 1 second after the first time chosen, the step is **won**
 
 ## Full game
 

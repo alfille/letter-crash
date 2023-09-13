@@ -1,6 +1,6 @@
 # Graphical Solution
 
-DSK has a very inventive solution for the single letter step,, at least for the 2-person game:
+DSK has a very inventive solution for the single letter step, at least for the 2-person game:
 
 ![](images/graphical.png)
 

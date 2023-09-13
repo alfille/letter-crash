@@ -34,3 +34,6 @@ Becomes:
 
 \\(Quantity = \sum_{i=0}\^{M-1}{p_{win}}\^ip_{loss}i\\,q_{win}+(1-{p_{win}}^M)q_{loss}+(1-{p_{win}}^M)Quantity+{p_{win}}\^M(M\\,q_{win})\\)
 
+Solving for *Quantity*
+
+\\({p_{win}}^M Quantity = \sum_{i=0}\^{M-1}{p_{win}}\^ip_{loss}i\\,q_{win}+(1-{p_{win}}^M)q_{loss}+{p_{win}}\^M(M\\,q_{win})\\)

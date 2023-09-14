@@ -1,48 +1,27 @@
 # Full Alphabet: Length
 
-# Full Alphabet: Time
-
 How many letters, on average, will we go though?
 
-Now compute
-  
-\\(Quantity = \sum_{i=0}\^{M-1}p_{win}\^ip_{loss}(i\\,q_{win}+q_{loss}+Quantity)+p_{win}\^M(M\\,q_{win})\\)
 
-becomes:
+From [our initial analysis](full.html)
 
-\\(L = \sum_{i=0}\^{M-1}p_{win}\^i\\,p_{loss}(i+1+L)+p_{win}\^M(M)\\)
+\\(Quantity = \left(\frac{1-{p_{win}}^M}{{p_{win}}^M}\right)\left(q_{loss}+\frac{p_{win}}{1-p_{win}}q_{win}\right)+q_{victory}\\)
 
-expanding:
+where
+\\(q_{win}=1\\)
 
-\\(L = p_{loss}\sum_{i=0}\^{M-1}i\\,p_{win}\^i+p_{loss}\sum_{i=0}\^{M-1}p_{win}\^i+p_{loss}L\sum_{i=0}\^{M-1}p_{win}\^i+Mp_{win}\^M\\)
+\\(q_{loss}=1\\)
 
-now:
+\\(q_{victory}=0\\)
 
-\\(\sum_{i=0}\^{M-1}p_{win}\^i=\frac{1-p_{win}^M}{1-p_{win}}=\frac{1-p_{win}^M}{p_{loss}}\\)
+since each step counts as *1* but winning doesn't add another letter.
 
-and:
+\\(Length = \left(\frac{1-{p_{win}}^M}{{p_{win}}^M}\right)\left(1+\frac{p_{win}}{1-p_{win}}\right) = \left(\frac{1-{p_{win}}^M}{{p_{win}}^M}\right)\left(\frac{1}{1-p_{win}}\right)\\)
 
-\\(\sum_{i=0}\^{M-1}i\\,p_{win}\^i=\frac{(M-1)p_{win}^{M+1}-Mp_{win}^M+p_{win}}{(1-p_{win})^2}=\frac{(M-1)p_{win}^{M+1}-Mp_{win}^M+p_{win}}{(1-p_{win})p_{loss}}\\)
-
-So:
-
-\\(L = p_{loss}\sum_{i=0}\^{M-1}i\\,p_{win}\^i+(1-p_{win}^M)+L(1-p_{win}^M)+Mp_{win}\^M\\)
-
-Move *L* terms:
-
-\\(p_{win}^ML = p_{loss}\sum_{i=0}\^{M-1}i\\,p_{win}\^i+1-p_{win}^M+Mp_{win}\^M\\)
-
-Expanding:
-
-\\(p_{win}^ML = \frac{(M-1)p_{win}^{M+1}-Mp_{win}^M+p_{win}}{1-p_{win}}+1+(M-1)p_{win}\^M\\)
-
-\\(p_{win}^ML = \frac{p_{win}-p_{win}^M}{1-p_{win}}+1\\)
-
-\\(p_{win}^ML = p_{win}^{M-1}+1\\)
-
-\\(L = p_{win}^{-1}+p_{win}^{-M}\\)
 
 ----------
-Not very well behaved. Plotting log(L)
+Not very well behaved for low probability steps.
 
 ![](images/full_length.png)
+
+Cut off at 500 length.

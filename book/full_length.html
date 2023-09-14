@@ -169,30 +169,19 @@
                 <div id="content" class="content">
                     <main>
                         <h1 id="full-alphabet-length"><a class="header" href="#full-alphabet-length">Full Alphabet: Length</a></h1>
-<h1 id="full-alphabet-time"><a class="header" href="#full-alphabet-time">Full Alphabet: Time</a></h1>
 <p>How many letters, on average, will we go though?</p>
-<p>Now compute</p>
-<p>\(Quantity = \sum_{i=0}^{M-1}p_{win}^ip_{loss}(i\,q_{win}+q_{loss}+Quantity)+p_{win}^M(M\,q_{win})\)</p>
-<p>becomes:</p>
-<p>\(L = \sum_{i=0}^{M-1}p_{win}^i\,p_{loss}(i+1+L)+p_{win}^M(M)\)</p>
-<p>expanding:</p>
-<p>\(L = p_{loss}\sum_{i=0}^{M-1}i\,p_{win}^i+p_{loss}\sum_{i=0}^{M-1}p_{win}^i+p_{loss}L\sum_{i=0}^{M-1}p_{win}^i+Mp_{win}^M\)</p>
-<p>now:</p>
-<p>\(\sum_{i=0}^{M-1}p_{win}^i=\frac{1-p_{win}^M}{1-p_{win}}=\frac{1-p_{win}^M}{p_{loss}}\)</p>
-<p>and:</p>
-<p>\(\sum_{i=0}^{M-1}i\,p_{win}^i=\frac{(M-1)p_{win}^{M+1}-Mp_{win}^M+p_{win}}{(1-p_{win})^2}=\frac{(M-1)p_{win}^{M+1}-Mp_{win}^M+p_{win}}{(1-p_{win})p_{loss}}\)</p>
-<p>So:</p>
-<p>\(L = p_{loss}\sum_{i=0}^{M-1}i\,p_{win}^i+(1-p_{win}^M)+L(1-p_{win}^M)+Mp_{win}^M\)</p>
-<p>Move <em>L</em> terms:</p>
-<p>\(p_{win}^ML = p_{loss}\sum_{i=0}^{M-1}i\,p_{win}^i+1-p_{win}^M+Mp_{win}^M\)</p>
-<p>Expanding:</p>
-<p>\(p_{win}^ML = \frac{(M-1)p_{win}^{M+1}-Mp_{win}^M+p_{win}}{1-p_{win}}+1+(M-1)p_{win}^M\)</p>
-<p>\(p_{win}^ML = \frac{p_{win}-p_{win}^M}{1-p_{win}}+1\)</p>
-<p>\(p_{win}^ML = p_{win}^{M-1}+1\)</p>
-<p>\(L = p_{win}^{-1}+p_{win}^{-M}\)</p>
+<p>From <a href="full.html">our initial analysis</a></p>
+<p>\(Quantity = \left(\frac{1-{p_{win}}^M}{{p_{win}}^M}\right)\left(q_{loss}+\frac{p_{win}}{1-p_{win}}q_{win}\right)+q_{victory}\)</p>
+<p>where
+\(q_{win}=1\)</p>
+<p>\(q_{loss}=1\)</p>
+<p>\(q_{victory}=0\)</p>
+<p>since each step counts as <em>1</em> but winning doesn't add another letter.</p>
+<p>\(Length = \left(\frac{1-{p_{win}}^M}{{p_{win}}^M}\right)\left(1+\frac{p_{win}}{1-p_{win}}\right) = \left(\frac{1-{p_{win}}^M}{{p_{win}}^M}\right)\left(\frac{1}{1-p_{win}}\right)\)</p>
 <hr />
-<p>Not very well behaved. Plotting log(L)</p>
+<p>Not very well behaved for low probability steps.</p>
 <p><img src="images/full_length.png" alt="" /></p>
+<p>Cut off at 500 length.</p>
 
                     </main>
 

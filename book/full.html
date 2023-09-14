@@ -192,23 +192,41 @@
 </ul>
 </li>
 </ul>
-<p>\(Quantity = \sum_{i=0}^{M-1}{p_{win}}^ip_{loss}(i\,q_{win}+q_{loss}+Quantity)+{p_{win}}^M(M\,q_{win})\)</p>
-<p>Here <em>Quantity</em> is what we're assessing (like probability, time, ...) and the <em>q</em>'s are the quantity of the individual win or loss steps.</p>
+<p>\(Quantity = \sum_{i=0}^{M-1}{p_{win}}^ip_{loss}(i\,q_{win}+q_{loss}+Quantity)+{p_{win}}^M(M\,q_{win}+q_{victory})\)</p>
+<p>Explanation:</p>
+<ul>
+<li>\(Quantity\) is what we're assessing (like probability, time, ...)</li>
+<li>\(q_{win}\) is the value of a step win</li>
+<li>\(q_{loss}\) is the value of a step loss</li>
+<li>\(q_{victory}\) is the value of a total win</li>
+<li>\(q_{failure}\) <em>is not needed since this game always eventually completes</em></li>
+</ul>
 <hr />
 <p>We can do some simplification using the formula for a <a href="https://en.wikipedia.org/wiki/Geometric_series">geometric series</a></p>
 <p>\(\sum_{i=0}^{M-1}{p_{win}}^i = \frac{1-{p_{win}}^M}{1-p_{win}} = \frac{1-{p_{win}}^M}{p_{loss}}\)</p>
 <p>So:</p>
-<p>\(Quantity = \sum_{i=0}^{M-1}{p_{win}}^ip_{loss}i\,q_{win}+\sum_{i=0}^{M-1}{p_{win}}^ip_{loss}q_{loss}+\sum_{i=0}^{M-1}{p_{win}}^ip_{loss}Quantity+{p_{win}}^M(M\,q_{win})\)</p>
+<p>\(Quantity = \sum_{i=0}^{M-1}{p_{win}}^ip_{loss}i\,q_{win}+\sum_{i=0}^{M-1}{p_{win}}^ip_{loss}q_{loss}+\sum_{i=0}^{M-1}{p_{win}}^ip_{loss}Quantity+{p_{win}}^M(M\,q_{win}+q_{victory})\)</p>
 <p>Becomes:</p>
-<p>\(Quantity = \sum_{i=0}^{M-1}{p_{win}}^ip_{loss}i\,q_{win}+(1-{p_{win}}^M)q_{loss}+(1-{p_{win}}^M)Quantity+{p_{win}}^M(M\,q_{win})\)</p>
+<p>\(Quantity = \sum_{i=0}^{M-1}{p_{win}}^ip_{loss}i\,q_{win}+(1-{p_{win}}^M)q_{loss}+(1-{p_{win}}^M)Quantity+{p_{win}}^M(M\,q_{win})+{p_{win}}^M\,q_{victory}\)</p>
 <p>Solving for <em>Quantity</em></p>
-<p>\({p_{win}}^M Quantity = q_{win}\,p_{loss}\sum_{i=0}^{M-1}{i\,{p_{win}}^i}+q_{loss}\,(1-{p_{win}}^M)+M\,q_{win}{p_{win}}^M\)</p>
+<p>\({p_{win}}^M Quantity = q_{win}\,p_{loss}\sum_{i=0}^{M-1}{i\,{p_{win}}^i}+q_{loss}\,(1-{p_{win}}^M)+M\,q_{win}\,{p_{win}}^M+q_{victory}\,{p_{win}}^M\)</p>
 <p>The series i*p^i also has a closed-form expression:</p>
 <p>\(\sum_{i=0}^{M-1}{i\,{p_{win}}^i} = \frac{(M-1){p_{win}}^{M+1}-M{p_{win}}^M+p_win}{(1-p_{win})^2}\)</p>
-<p>Substituting and conbining with the last term:</p>
-<p>\({p_{win}}^M Quantity = q_{win}\frac{p_{win}-{p_{win}}^{M+1}}{1-p_{win}}+q_{loss}\,(1-{p_{win}}^M)\)</p>
-<p>Alternatively:</p>
-<p>\(Quantity = \left(\frac{1-{p_{win}}^M}{{p_{win}}^M}\right)\left(q_{loss}+\frac{p_{win}}{1-p_{win}}q_{win}\right)\)</p>
+<p>Substituting and combining with the last term:</p>
+<p>\({p_{win}}^M Quantity = q_{win}\frac{p_{win}-{p_{win}}^{M+1}}{1-p_{win}}+q_{loss}\,(1-{p_{win}}^M)+q_{victory}\,{p_{win}}^M\)</p>
+<hr />
+<p>Finally:</p>
+<p>\(Quantity = \left(\frac{1-{p_{win}}^M}{{p_{win}}^M}\right)\left(q_{loss}+\frac{p_{win}}{1-p_{win}}q_{win}\right)+q_{victory}\)</p>
+<hr />
+<h2 id="analysis"><a class="header" href="#analysis">Analysis</a></h2>
+<p>There are 3 components of <em>Q</em></p>
+<p>\(Quantity = \left(\frac{1-{p_{win}}^M}{{p_{win}}^M}\right)\left(q_{loss}+\frac{p_{win}}{1-p_{win}}q_{win}\right)+q_{victory}\)</p>
+<h3 id="the-only-part-that-contains-m----the-alphabet-length"><a class="header" href="#the-only-part-that-contains-m----the-alphabet-length">The only part that contains <em>M</em> -- the alphabet length</a></h3>
+<p>\(\left(\frac{1-{p_{win}}^M}{{p_{win}}^M}\right)\)</p>
+<h3 id="the-part-that-depends-just-on-a-single-step"><a class="header" href="#the-part-that-depends-just-on-a-single-step">The part that depends just on a single step</a></h3>
+<p>\(\left(q_{loss}+\frac{p_{win}}{1-p_{win}}q_{win}\right)\)</p>
+<h3 id="constant-victory-component"><a class="header" href="#constant-victory-component">Constant victory component</a></h3>
+<p>\(q_{victory}\)</p>
 
                     </main>
 

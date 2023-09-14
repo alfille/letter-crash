@@ -2,42 +2,17 @@
 
 We already know the average time for a win or loss for each step (letter): \\(t_{win},t_{loss}\\)
 
-Now compute
-  
-\\(Quantity = \sum_{i=0}\^{M-1}p_{win}\^ip_{loss}(i\\,q_{win}+q_{loss}+Quantity)+p_{win}\^M(M\\,q_{win})\\)
 
-becomes:
+From [our initial analysis](full.html)
 
-\\(Time = \sum_{i=0}\^{M-1}p_{win}\^i\\,p_{loss}(i\\,t_{win}+t_{loss}+Time)+p_{win}\^M(Mt_{win})\\)
+\\(Quantity = \left(\frac{1-{p_{win}}^M}{{p_{win}}^M}\right)\left(q_{loss}+\frac{p_{win}}{1-p_{win}}q_{win}\right)+q_{victory}\\)
 
-expanding:
+where
+\\(q_{win}=t_{win}\\)
 
-\\(Time = p_{loss}t_{win}\sum_{i=0}\^{M-1}i\\,p_{win}\^i+p_{loss}t_{loss}\sum_{i=0}\^{M-1}p_{win}\^i+p_{loss}Time\sum_{i=0}\^{M-1}p_{win}\^i+p_{win}\^M(Mt_{win})\\)
+\\(q_{loss}=t_{loss}\\)
 
-now:
+\\(q_{victory}=0\\)
 
-\\(\sum_{i=0}\^{M-1}p_{win}\^i=\frac{1-p_{win}^M}{1-p_{win}}=\frac{1-p_{win}^M}{p_{loss}}\\)
+\\(Time = \left(\frac{1-{p_{win}}^M}{{p_{win}}^M}\right)\left(q]t_{loss}+\frac{p_{win}}{1-p_{win}}t_{win}\right)\\)
 
-and:
-
-\\(\sum_{i=0}\^{M-1}i\\,p_{win}\^i=\frac{(M-1)p_{win}^{M+1}-Mp_{win}^M+p_{win}}{(1-p_{win})^2}=\frac{(M-1)p_{win}^{M+1}-Mp_{win}^M+p_{win}}{(1-p_{win})p_{loss}}\\)
-
-So:
-
-\\(Time = p_{loss}t_{win}\sum_{i=0}\^{M-1}i\\,p_{win}\^i+t_{loss}(1-p_{win}^M)+Time(1-p_{win}^M)+p_{win}\^M(Mt_{win})\\)
-
-Move *Time* terms:
-
-\\(p_{win}^MTime = p_{loss}t_{win}\sum_{i=0}\^{M-1}i\\,p_{win}\^i+t_{loss}(1-p_{win}^M)+p_{win}\^M(Mt_{win})\\)
-
-Expanding:
-
-\\(p_{win}^MTime = t_{win}\frac{(M-1)p_{win}^{M+1}-Mp_{win}^M+p_{win}}{1-p_{win}}+t_{loss}(1-p_{win}\^M)+Mt_{win}p_{win}\^M\\)
-
-\\(p_{win}^MTime = t_{win}\frac{p_{win}-p_{win}^{M+1}-(M-1)p_{win}^M}{1-p_{win}}+t_{loss}(1-p_{win}\^M)\\)
-
-Finally:
-
-
-\\(Time = t_{win}p_{win}^{-M}\left(\frac{p_{win}-p_{win}^{M+1}-(M-1)p_{win}^M}{1-p_{win}}+t_{loss}(1-p_{win}\^M)\right)\\)
- 

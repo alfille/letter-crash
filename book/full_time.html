@@ -170,25 +170,13 @@
                     <main>
                         <h1 id="full-alphabet-time"><a class="header" href="#full-alphabet-time">Full Alphabet: Time</a></h1>
 <p>We already know the average time for a win or loss for each step (letter): \(t_{win},t_{loss}\)</p>
-<p>Now compute</p>
-<p>\(Quantity = \sum_{i=0}^{M-1}p_{win}^ip_{loss}(i\,q_{win}+q_{loss}+Quantity)+p_{win}^M(M\,q_{win})\)</p>
-<p>becomes:</p>
-<p>\(Time = \sum_{i=0}^{M-1}p_{win}^i\,p_{loss}(i\,t_{win}+t_{loss}+Time)+p_{win}^M(Mt_{win})\)</p>
-<p>expanding:</p>
-<p>\(Time = p_{loss}t_{win}\sum_{i=0}^{M-1}i\,p_{win}^i+p_{loss}t_{loss}\sum_{i=0}^{M-1}p_{win}^i+p_{loss}Time\sum_{i=0}^{M-1}p_{win}^i+p_{win}^M(Mt_{win})\)</p>
-<p>now:</p>
-<p>\(\sum_{i=0}^{M-1}p_{win}^i=\frac{1-p_{win}^M}{1-p_{win}}=\frac{1-p_{win}^M}{p_{loss}}\)</p>
-<p>and:</p>
-<p>\(\sum_{i=0}^{M-1}i\,p_{win}^i=\frac{(M-1)p_{win}^{M+1}-Mp_{win}^M+p_{win}}{(1-p_{win})^2}=\frac{(M-1)p_{win}^{M+1}-Mp_{win}^M+p_{win}}{(1-p_{win})p_{loss}}\)</p>
-<p>So:</p>
-<p>\(Time = p_{loss}t_{win}\sum_{i=0}^{M-1}i\,p_{win}^i+t_{loss}(1-p_{win}^M)+Time(1-p_{win}^M)+p_{win}^M(Mt_{win})\)</p>
-<p>Move <em>Time</em> terms:</p>
-<p>\(p_{win}^MTime = p_{loss}t_{win}\sum_{i=0}^{M-1}i\,p_{win}^i+t_{loss}(1-p_{win}^M)+p_{win}^M(Mt_{win})\)</p>
-<p>Expanding:</p>
-<p>\(p_{win}^MTime = t_{win}\frac{(M-1)p_{win}^{M+1}-Mp_{win}^M+p_{win}}{1-p_{win}}+t_{loss}(1-p_{win}^M)+Mt_{win}p_{win}^M\)</p>
-<p>\(p_{win}^MTime = t_{win}\frac{p_{win}-p_{win}^{M+1}-(M-1)p_{win}^M}{1-p_{win}}+t_{loss}(1-p_{win}^M)\)</p>
-<p>Finally:</p>
-<p>\(Time = p_{win}^{-M}\left(t_{win}\frac{p_{win}-p_{win}^{M+1}-(M-1)p_{win}^M}{1-p_{win}}+t_{loss}(1-p_{win}^M)\right)\)</p>
+<p>From <a href="full.html">our initial analysis</a></p>
+<p>\(Quantity = \left(\frac{1-{p_{win}}^M}{{p_{win}}^M}\right)\left(q_{loss}+\frac{p_{win}}{1-p_{win}}q_{win}\right)+q_{victory}\)</p>
+<p>where
+\(q_{win}=t_{win}\)</p>
+<p>\(q_{loss}=t_{loss}\)</p>
+<p>\(q_{victory}=0\)</p>
+<p>\(Time = \left(\frac{1-{p_{win}}^M}{{p_{win}}^M}\right)\left(t_{loss}+\frac{p_{win}}{1-p_{win}}t_{win}\right)\)</p>
 
                     </main>
 

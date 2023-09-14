@@ -432,6 +432,7 @@ negative;
 <p>\(\lim_{T \to \infty} t_{loss}=\frac{2(n-1)}{n(n+1)}T\)</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="full-alphabet"><a class="header" href="#full-alphabet">Full Alphabet</a></h1>
 <p>The game is not just a single letter, but an alphabet of <em>M</em> letters, with restarts after any crashes.</p>
+<h2 id="description"><a class="header" href="#description">Description</a></h2>
 <p>To solve, we'll use a general &quot;recurrence&quot; approach:</p>
 <p>This means:</p>
 <ul>
@@ -464,6 +465,7 @@ negative;
 <li>\(q_{failure}\) <em>is not needed since this game always eventually completes</em></li>
 </ul>
 <hr />
+<h2 id="simplification"><a class="header" href="#simplification">Simplification</a></h2>
 <p>We can do some simplification using the formula for a <a href="https://en.wikipedia.org/wiki/Geometric_series">geometric series</a></p>
 <p>\(\sum_{i=0}^{M-1}{p_{win}}^i = \frac{1-{p_{win}}^M}{1-p_{win}} = \frac{1-{p_{win}}^M}{p_{loss}}\)</p>
 <p>So:</p>
@@ -477,18 +479,36 @@ negative;
 <p>Substituting and combining with the last term:</p>
 <p>\({p_{win}}^M Quantity = q_{win}\frac{p_{win}-{p_{win}}^{M+1}}{1-p_{win}}+q_{loss}\,(1-{p_{win}}^M)+q_{victory}\,{p_{win}}^M\)</p>
 <hr />
+<h2 id="solution"><a class="header" href="#solution">Solution</a></h2>
 <p>Finally:</p>
 <p>\(Quantity = \left(\frac{1-{p_{win}}^M}{{p_{win}}^M}\right)\left(q_{loss}+\frac{p_{win}}{1-p_{win}}q_{win}\right)+q_{victory}\)</p>
 <hr />
 <h2 id="analysis"><a class="header" href="#analysis">Analysis</a></h2>
+<h3 id="components"><a class="header" href="#components">Components</a></h3>
 <p>There are 3 components of <em>Q</em></p>
 <p>\(Quantity = \left(\frac{1-{p_{win}}^M}{{p_{win}}^M}\right)\left(q_{loss}+\frac{p_{win}}{1-p_{win}}q_{win}\right)+q_{victory}\)</p>
-<h3 id="the-only-part-that-contains-m----the-alphabet-length"><a class="header" href="#the-only-part-that-contains-m----the-alphabet-length">The only part that contains <em>M</em> -- the alphabet length</a></h3>
+<h4 id="the-only-part-that-contains-m----the-alphabet-length"><a class="header" href="#the-only-part-that-contains-m----the-alphabet-length">The only part that contains <em>M</em> -- the alphabet length</a></h4>
 <p>\(\left(\frac{1-{p_{win}}^M}{{p_{win}}^M}\right)\)</p>
-<h3 id="the-part-that-depends-just-on-a-single-step"><a class="header" href="#the-part-that-depends-just-on-a-single-step">The part that depends just on a single step</a></h3>
+<p><img src="images/component1.png" alt="" /></p>
+<h4 id="the-part-that-depends-just-on-a-single-step"><a class="header" href="#the-part-that-depends-just-on-a-single-step">The part that depends just on a single step</a></h4>
 <p>\(\left(q_{loss}+\frac{p_{win}}{1-p_{win}}q_{win}\right)\)</p>
-<h3 id="constant-victory-component"><a class="header" href="#constant-victory-component">Constant victory component</a></h3>
+<h4 id="constant-victory-component"><a class="header" href="#constant-victory-component">Constant victory component</a></h4>
 <p>\(q_{victory}\)</p>
+<hr />
+<h3 id="compounding"><a class="header" href="#compounding">Compounding</a></h3>
+<p>As <em>M</em> (alphabet length) increases, so does <em>Quantity</em> both to infinity. </p>
+<p>The reason is that we are looking at the <em>future value</em> of <em>Quantity</em></p>
+<p>\(Quantity = \left(\frac{1-{p_{win}}^M}{{p_{win}}^M}\right)\left(q_{loss}+\frac{p_{win}}{1-p_{win}}q_{win}\right)+q_{victory}\)</p>
+<p>If we think of \(1/p_{win}\) as the return rate of an investment, then \({p_{win}}^M\,Quantity\) is the <em>present value</em>.</p>
+<p>Rearrange:</p>
+<p>\({p_{win}}^M\,Quantity = \left(\frac{1-{p_{win}}^M}{1-p_{win}}\right)\left((1-p_{win})\,q_{loss}+p_{win}\,q_{win}\right)+{p_{win}}^M\,q_{victory}\)</p>
+<p>Or:</p>
+<p>\(Present(Quantity) = \left(\frac{1-{p_{win}}^M}{1-p_{win}}\right)\left((1-p_{win})\,q_{loss}+p_{win}\,q_{win}\right)+Present(q_{victory})\)</p>
+<p>Now:</p>
+<p>\(Stepvalue=\left((1-p_{win})\,q_{loss}+p_{win}\,q_{win}\right)\)</p>
+<p>And reversing the geometric series:</p>
+<p>\(Present(Quantity) = \left(1+p_{win}+{p_{win}}^2+\dots+{p_{win}}^{M-1}\right)\,Stepvalue+Present(q_{victory})\)</p>
+<p>This is another way of looking at the game: The current value of an annuity rather than the cumulative future value.</p>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="full-alphabet-probability"><a class="header" href="#full-alphabet-probability">Full Alphabet: Probability</a></h1>
 <p>We expect this to be <em>1</em> since the game rules are to keep restarting until a victory</p>
 <p>From <a href="full.html">our initial analysis</a></p>
@@ -523,7 +543,7 @@ negative;
 <p>Not very well behaved for low probability steps.</p>
 <p><img src="images/full_length.png" alt="" /></p>
 <p>Cut off at 500 length.</p>
-<div style="break-before: page; page-break-before: always;"></div><h1 id="simplification"><a class="header" href="#simplification">Simplification</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="simplification-1"><a class="header" href="#simplification-1">Simplification</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="answers"><a class="header" href="#answers">Answers</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="symbolic"><a class="header" href="#symbolic">Symbolic</a></h1>
 <div style="break-before: page; page-break-before: always;"></div><h1 id="numerical"><a class="header" href="#numerical">Numerical</a></h1>

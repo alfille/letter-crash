@@ -21,6 +21,7 @@ This means:
 \\(Quantity = \sum_{i=0}\^{M-1}{p_{win}}\^ip_{loss}(i\\,q_{win}+q_{loss}+Quantity)+{p_{win}}\^M(M\\,q_{win}+q_{victory})\\)
 
 Explanation:
+
 * \\(Quantity\\) is what we're assessing (like probability, time, ...)
 * \\(q_{win}\\) is the value of a step win
 * \\(q_{loss}\\) is the value of a step loss
